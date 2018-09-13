@@ -1,13 +1,15 @@
 # Write your code here!
+require "pry"
 
 def game_hash
   {
+
     :home => {
       :team_name => "Brooklyn Nets",
-      :colors => "Black", "White",
+      :colors => ["Black", "White"],
       :players => {
         "Alan Anderson" => {
-         :number => 0,
+       :number => 0,
        :shoe => 16,
        :points => 22,
        :rebounds => 12,
@@ -57,10 +59,11 @@ def game_hash
        :slam_dunks => 1
         }
       }
+
     },
     :away => {
       :team_name => "Charlotte Hornets",
-      :colors => "Turquoise", "Purple",
+      :colors => ["Turquoise", "Purple"],
       :players => {
         "Jeff Adrien" => {
        :number => 4,
@@ -112,16 +115,45 @@ def game_hash
        :blocks => 5,
        :slam_dunks => 12
         }
+      }
     }
   }
 end
 
 
+def good_practices
+  game_hash.each do |location, team_data|
+    #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
+    binding.pry
+      team_data.each do |attribute, data|
+        #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
+        binding.pry
+ 
+        #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
+        data.each do |data_item|
+            binding.pry
+      end
+    end
+  end
+end
 
 
 
+def num_points_scored(name)
+ 
+  game_hash.each do |location, team_data|
+    team_data.each do |key, val|  # remember it's iterating over key, value - so you can't include 3 vars here !!
+     puts key
+      key.each do |key1, val1|
+         binding.pry
+      key1[name][:points] if key1.include?(name)
+      end
+    end
+  end
+end
 
 
+num_points_scored("Brendan Haywood")
 
 
 
