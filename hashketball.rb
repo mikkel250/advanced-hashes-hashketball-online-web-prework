@@ -121,6 +121,7 @@ def game_hash
 end
 
 
+=begin
 def good_practices
   game_hash.each do |location, team_data|
     #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
@@ -136,18 +137,28 @@ def good_practices
     end
   end
 end
+=end
 
 
+# I think for the second iteration below this will be handy:
+# value.is_a?(Hash)
 
 def num_points_scored(name)
  
   game_hash.each do |location, team_data|
-    team_data.each do |key, val|  # remember it's iterating over key, value - so you can't include 3 vars here !!
-     puts key
-      key.each do |key1, val1|
-         binding.pry
-      key1[name][:points] if key1.include?(name)
+#    binding.pry
+    team_data.each do |key, val|  # LV1 remember, player names are values of :players, so to access, need to iterate through LV2
+     puts :players[name][:points] if :players[name] == name
+      binding.pry
+=begin
+ #     key.each do |attributes, values| 
+     #   binding.pry
+ #       values.each do |stat, num|    # This is failing because these are all strings and symbols
+#         binding.pry
+ #     stat[name][:points] if key1.include?(name)
+  #      end
       end
+=end      
     end
   end
 end
