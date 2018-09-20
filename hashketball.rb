@@ -175,3 +175,22 @@ def player_stats(name)
   
 end
 
+
+def big_shoe_rebounds
+  
+end
+
+# Bonus 
+def winning_team
+  
+end
+
+def player_with_longest_name
+
+end
+
+#Super Bonus
+
+def long_name_steals_a_ton?
+  
+end
