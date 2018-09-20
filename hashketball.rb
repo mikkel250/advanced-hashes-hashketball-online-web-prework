@@ -121,7 +121,7 @@ def game_hash
 end
 
 
-=begin
+
 def good_practices
   game_hash.each do |location, team_data|
     #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
@@ -131,40 +131,47 @@ def good_practices
         binding.pry
  
         #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
-        data.each do |data_item|
+       attribute.each do |data_item|
             binding.pry
       end
     end
   end
 end
-=end
-
-
-# I think for the second iteration below this will be handy:
-# value.is_a?(Hash)
 
 def num_points_scored(name)
- 
-  game_hash.each do |location, team_data|
-#    binding.pry
-    team_data.each do |key, val|  # LV1 remember, player names are values of :players, so to access, need to iterate through LV2
-     puts :players[name][:points] if :players[name] == name
-      binding.pry
-=begin
- #     key.each do |attributes, values| 
-     #   binding.pry
- #       values.each do |stat, num|    # This is failing because these are all strings and symbols
-#         binding.pry
- #     stat[name][:points] if key1.include?(name)
-  #      end
+ game_hash.each do |location, team_hash|
+   
+   #the below is actually iterating through the keys of the hash containing the team info, because the value of game_hash is....another hash
+    team_hash.each do |key, vals|
+       if key == :players     # this makes sure I'm only iterating through the right pair to begin with
+        return vals[name][:points] if vals[name]  # the return keyword ensures it will pop out of the method once the answer has been found 
       end
-=end      
     end
   end
 end
 
 
-num_points_scored("Brendan Haywood")
+def shoe_size(name)
+  
+end
 
 
+def team_colors(team_name)
+  
+end
+
+def team_names
+  game_hash.each do |key, val| 
+    return val if val == :team_name  # select might be better here
+  end
+end
+
+def player_numbers(team_name)
+  
+end
+
+
+def player_stats(name)
+  
+end
 
