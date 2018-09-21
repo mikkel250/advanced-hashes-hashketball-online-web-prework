@@ -182,17 +182,44 @@ end
 def team_names
   names = []
   game_hash.each do |location, team_hash|
-    #binding.pry
     names << team_hash.fetch_values(:team_name)
   end
   
   names.flatten   # flatten is necessary because fetch was putting two arrays inside names
+
 end
 
 
+#  takes in an argument of a team name and returns an array of the jersey number's for that team
+
+# this is working, just need to fix the conditional because it looks like it's returning all the numbers not a specific team
 def player_numbers(team_name)
+  nums = []
   
+  tname = false
+  game_hash.each do |location, team_hash|
+
+   
+   #the below is actually iterating through the keys of the hash containing the team info, because the value of game_hash is....another hash
+    team_hash.each do |key, vals|
+       
+       #set flag to true if it's the right team
+      if vals == team_name 
+        tname = true 
+        # this makes sure I'm only iterating through the right pair to begin with
+        if key == :players && tname == true   # might need to swap these two
+          vals.each do |player, stat|   # remember stat is a hash (the value of the player name)!
+          
+          #push the stat into the array if it's the jersey number, otherwise keep iterating.             
+            nums << stat.fetch_values(:number)
+          end
+        end
+      end
+    end
+  end
+  nums.flatten
 end
+
 
 
 def player_stats(name)
