@@ -121,7 +121,7 @@ def game_hash
 end
 
 
-
+=begin
 def good_practices
   game_hash.each do |location, team_data|
     #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
@@ -137,6 +137,8 @@ def good_practices
     end
   end
 end
+=end 
+
 
 def num_points_scored(name)
  game_hash.each do |location, team_hash|
@@ -152,19 +154,41 @@ end
 
 
 def shoe_size(name)
-  
+  game_hash.each do |location, team_hash|
+    team_hash.each do |key, val|
+      if key == :players
+        return val[name][:shoe] if val[name]
+      end
+    end
+  end
 end
 
 
 def team_colors(team_name)
-  
-end
-
-def team_names
-  game_hash.each do |key, val| 
-    return val if val == :team_name  # select might be better here
+  game_hash.each do |location, team_hash|
+    flag = false
+    team_hash.each do |key, val|
+      
+      if val == team_name  # this is passing by the colors key when it iterates, and returning the entire hash...meaning it's not evaluating to true...maybe i need to use a flag
+      flag = true
+        
+        return team_hash[:colors] if flag == true
+      end
+    end
   end
 end
+
+#maybe try fetch_values here?
+def team_names
+  names = []
+  game_hash.each do |location, team_hash|
+    #binding.pry
+    names << team_hash.fetch_values(:team_name)
+  end
+  
+  names.flatten   # flatten is necessary because fetch was putting two arrays inside names
+end
+
 
 def player_numbers(team_name)
   
