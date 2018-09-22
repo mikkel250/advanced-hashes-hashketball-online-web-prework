@@ -164,6 +164,7 @@ def shoe_size(name)
 end
 
 
+
 def team_colors(team_name)
   game_hash.each do |location, team_hash|
     flag = false
@@ -178,25 +179,24 @@ def team_colors(team_name)
   end
 end
 
-#maybe try fetch_values here?
+
 def team_names
   names = []
   game_hash.each do |location, team_hash|
     names << team_hash.fetch_values(:team_name)
   end
-  
   names.flatten   # flatten is necessary because fetch was putting two arrays inside names
-
 end
 
 
 #  takes in an argument of a team name and returns an array of the jersey number's for that team
 
 # this is working, just need to fix the conditional because it looks like it's returning all the numbers not a specific team
+
 def player_numbers(team_name)
   nums = []
   
-  tname = false
+  
   game_hash.each do |location, team_hash|
 
    
@@ -205,13 +205,14 @@ def player_numbers(team_name)
        
        #set flag to true if it's the right team
       if vals == team_name 
-        tname = true 
+       
         # this makes sure I'm only iterating through the right pair to begin with
-        if key == :players && tname == true   # might need to swap these two
-          vals.each do |player, stat|   # remember stat is a hash (the value of the player name)!
-          
+        if key == :players   # might need to swap these two
+          vals.each do |player, stat_hash|   # remember stat is a hash (the value of the player name)!
+          binding.pry
           #push the stat into the array if it's the jersey number, otherwise keep iterating.             
-            nums << stat.fetch_values(:number)
+            nums << points_scored(player)
+            
           end
         end
       end
@@ -220,6 +221,16 @@ def player_numbers(team_name)
   nums.flatten
 end
 
+
+def points_scored(name)
+  game_hash.each do |location, team_hash|
+    team_hash.each do |key, val|
+      if key == :players
+        return val[name][:points] if val[name]
+      end
+    end
+  end
+end
 
 
 def player_stats(name)
