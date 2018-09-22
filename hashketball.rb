@@ -211,7 +211,7 @@ def player_numbers(team_name)
           vals.each do |player, stat_hash|   # remember stat is a hash (the value of the player name)!
           binding.pry
           #push the stat into the array if it's the jersey number, otherwise keep iterating.             
-            nums << points_scored(player)
+            nums << jersey_number(player)
             
           end
         end
