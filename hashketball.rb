@@ -234,7 +234,13 @@ end
 
 
 def player_stats(name)
-  
+  game_hash.each do |location, team_hash|
+    team_hash.each do |key, val|
+      if key == :players
+        return val[name]
+      end
+    end
+  end
 end
 
 
