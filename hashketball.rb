@@ -222,11 +222,11 @@ def player_numbers(team_name)
 end
 
 
-def points_scored(name)
+def jersey_number(name)
   game_hash.each do |location, team_hash|
     team_hash.each do |key, val|
       if key == :players
-        return val[name][:points] if val[name]
+        return val[name][:number] if val[name]
       end
     end
   end
